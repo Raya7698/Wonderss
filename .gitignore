@@ -1,0 +1,6 @@
+.env
+**/migrations/*.py
+/media/
+db/sqlite3
+blog/settings.py
+.venv

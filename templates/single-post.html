@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<body>
+    {% include "include/header.html" %}
+
+<section id="home" >
+     <div class="container">
+          <div class="row">
+               <div class="col-md-12 col-sm-12">
+                    <h1>{{ post.title }}</h1>
+               </div>
+          </div>
+     </div>
+</section>
+
+<section id="blog-single-post">
+     <div class="container">
+          <div class="row">
+               <div class="col-md-offset-1 col-md-10 col-sm-12">
+
+                   <!-- Один пост -->
+                   <div class="blog-post-thumb">
+
+                       <!-- Изображение поста -->
+                       <div class="blog-post-image">
+                           <img src="{{ post.photo.url }}" class="img-responsive" alt="" width="800px">
+                       </div>
+
+                       <!-- Дата -->
+                       <div class="blog-post-format">
+                           <span><i class="fa fa-date"></i> {{ post.created_at }}</span>
+                       </div>
+
+                       <!-- Описание и автор -->
+                       <div class="blog-post-des">
+                           <p>{{ post.description }}</p>
+                           <p>Автор: {{ post.author }}</p>
+                       </div>
+
+                   </div>
+
+                   <!-- Секция комментариев -->
+                   <h3>Комментарии</h3>
+                   {% for comment in comments %}
+                   <div class="be-comment">
+                       <div class="be-img-comment">
+                           <a href="#">
+                               <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="be-ava-comment">
+                           </a>
+                       </div>
+                       <div class="be-comment-content">
+                           <span class="be-comment-name">
+                               <a href="#">{{ comment.name }}</a>
+                           </span>
+                           <span class="be-comment-time">
+                               <i class="fa fa-clock-o"></i>
+                               {{ comment.created_at }}
+                           </span>
+                           <p class="be-comment-text">
+                               {{ comment.content }}
+                           </p>
+                       </div>
+                   </div>
+                   {% empty %}
+                   <p>Комментариев пока нет.</p>
+                   {% endfor %}
+
+                   <!-- Форма добавления комментария -->
+                   <h3>Оставить комментарий</h3>
+                   <form action="{% url 'single_post' post.id %}" method="post" class="form-block">
+                       {% csrf_token %}
+                       <div class="row">
+                          {{form.as_p}}
+                           <button type="submit" class="btn btn-primary pull-right">Отправить</button>
+                       </div>
+                   </form>
+
+               </div>
+          </div>
+     </div>
+</section>
+
+{% include "include/footer.html" %}
+{% endblock %}

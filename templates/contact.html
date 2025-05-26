@@ -1,0 +1,79 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <body>
+        {% include "include/header.html" %}
+
+<!-- PRE LOADER -->
+
+<div class="preloader">
+     <div class="sk-spinner sk-spinner-wordpress">
+          <span class="sk-inner-circle"></span>
+     </div>
+</div>
+
+<!-- Navigation section  -->
+
+
+<!-- Home Section -->
+<section id="home" class="main-contact parallax-section"
+         style="background: url('{% static 'img/104227.jpg' %}') no-repeat center center; background-size: cover;">
+
+    <div class="overlay"></div>
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center">
+                    <h1>Contact Us</h1>
+               </div>
+
+          </div>
+     </div>
+</section>
+
+<!-- Contact Section -->
+
+<section id="contact">
+     <div class="container">
+          <div class="row">
+
+               <div class="col-md-offset-1 col-md-10 col-sm-12">
+                    <h2>Добро пожаловать</h2>
+                    <p>
+Мы рады каждому гостю — загляните, напишите, расскажите о себе.
+Мы открыты к диалогу, идеям и просто тёплому общению.
+Пишите нам — вместе мы можем создать что-то удивительное.</p>
+
+                    <form action="{% url 'contact' %}" method="post">
+                        {% csrf_token %}
+                        {{from.as_p}}
+                         <div class="col-md-4 col-sm-4">
+                             <a>name</a>
+                             {{form.full_name}}
+                         </div>
+                         <div class="col-md-4 col-sm-4">
+                              <a>email</a>
+                              {{form.email}}
+                      	 </div>
+                         <div class="col-md-4 col-sm-4">
+                              <a>тема обращения</a>
+                             {{form.subject}}
+                      	 </div>
+                         <div class="col-md-12 col-sm-12">
+                              <a>сообшение</a>
+                             {{form.message}}
+                         </div>
+                         <div class="col-md-3 col-sm-6">
+                              <input name="submit" type="submit" class="form-control" id="submit" value="Send">
+                         </div>
+                    </form>
+               </div>
+
+          </div>
+     </div>
+</section>
+    {% include "include/footer.html" %}
+
+    {% endblock %}

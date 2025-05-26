@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <body>
+        {% include "include/header.html" %}
+<!-- PRE LOADER -->
+
+
+<!-- Home Section -->
+
+<section id="home" class="main-about parallax-section"
+         style="background: url({% static 'img/9fd4180acde7fe5270d0fa02e8ac9dbe.png' %}) no-repeat center center; background-size: cover;">
+
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div id="particles-js"></div>
+            <div class="col-md-12 col-sm-12 text-center">
+                    <h1>About Us</h1>
+               </div>
+
+          </div>
+     </div>
+</section>
+
+<!-- About Section -->
+
+<section id="about">
+     <div class="container">
+          <div class="row">
+
+                   {% for about in abouts %}
+                    <div class="col-md-4 col-sm-4">
+                         <img src="{{about.photo.url}}" class="img-responsive" alt="Blog Image">
+                         <h3>{{about.title}}</h3>
+                         <p>{{about.description}}</p>
+                    </div>
+     {% endfor %}
+               </div>
+ <h3>Почему я пишу об этом?</h3>
+         <p>Потому что фильмы Миядзаки научили меня мечтать, видеть красоту в деталях и ценить простое. Этот блог — как дневник фаната, который хочет делиться своим восхищением и находить единомышленников. Спасибо, что ты здесь.</p>
+          </div>
+</section>
+
+{% include "include/footer.html" %}
+
+    {% endblock %}

@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <body>
+        {% include "include/header.html" %}
+<!-- PRE LOADER -->
+
+<div class="preloader">
+     <div class="sk-spinner sk-spinner-wordpress">
+          <span class="sk-inner-circle"></span>
+     </div>
+</div>
+
+<!-- Navigation section  -->
+
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+     <div class="container">
+
+
+  </div>
+</div>
+
+<!-- Home Section -->
+
+<section id="home" class="main-home parallax-section" style="background-image: url('{% static 'img/studio_ghibli_wallpaper.jpg' %}')">
+     <div class="overlay">
+     </div>
+     <div id="particles-js"></div>
+     <div class="container">
+          <div class="row">
+               <div class="col-md-12 col-sm-12">
+                    <h1>Welcome to the world of wonders</h1>
+                    <h4></h4>
+                    <a href="#blog" class="smoothScroll btn btn-default">Hello</a>
+               </div>
+          </div>
+     </div>
+</section>
+
+<!-- Blog Section -->
+
+<section id="blog">
+     <div class="container">
+         {% for blog in blogs %}
+          <div class="row">
+
+               <div class="col-md-offset-1 col-md-10 col-sm-12">
+                    <div class="blog-post-thumb">
+
+                         <div class="blog-post-image">
+
+                              <a href="single-post.html">
+                                   <img src="{{blog.photo.url}}" class="img-responsive" alt="">
+                              </a>
+                         </div>
+                         <div class="blog-post-title">
+                             <a href="{% url 'single_post' blog.id %}">{{ blog.title }}</a>
+                         </div>
+
+                         <div class="blog-post-format">
+
+   <span><a href="{{blog.about_photo.url}}"><img src="" class="img-responsive img-circle"</a></span>
+
+                              <span><i class="fa fa-date"></i> {{blog.created_at}}</span>
+                              <span><a href=""><i class="fa fa-comment-o"></i></a></span>
+                         </div>
+                         <div class="blog-post-des">
+                              <p>{{blog.description}}</p>
+                              <a href="single-post.html" class="btn btn-default">Continue Reading</a>
+                         </div>
+                    </div>
+               </div>
+
+{% endfor %}
+
+</section>
+<!-- Back top -->
+<a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+</body>
+<div class="paginate wrapper">
+    <ul>
+        {% if blogs.has_previous %}
+            <li><a href="?page=1">&lang;</a></li>
+            <li><a href="?page={{ blogs.previous_page_number }}">.</a></li>
+        {% else %}
+            <li class="disabled"><a href="">&lang;</a></li>
+            <li class="disabled"><a href="">.</a></li>
+        {% endif %}
+
+        {% for num in page_range %}
+            <li {% if blogs.number == num %} class="active" {% endif %}>
+                <a href="?page={{ num }}">{{ num }}</a>
+            </li>
+        {% endfor %}
+
+        {% if blogs.has_next %}
+            <li><a href="?page={{ blogs.next_page_number }}">.</a></li>
+            <li><a href="?page={{ blogs.paginator.num_pages }}">&rang;</a></li>
+        {% else %}
+            <li class="disabled"><a href="">.</a></li>
+            <li class="disabled"><a href="">&rang;</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+{% include "include/footer.html" %}
+
+    {% endblock %}

@@ -1,0 +1,35 @@
+.paginate {
+  text-align: center;
+  margin-top: 50px; /* Отступ сверху */
+  margin-bottom: 50px; /* Отступ перед футером */
+}
+
+
+
+.paginate ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex; /* кнопки будут в одну линию */
+  gap: 5px; /* расстояние между кнопками */
+}
+
+.paginate li {
+  display: inline;
+}
+
+.paginate a {
+  border-radius: 5px;
+  background: #f0f0f0;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.paginate a:hover,
+.paginate a.active {
+  background: #333;
+  color: #fff;
+}
